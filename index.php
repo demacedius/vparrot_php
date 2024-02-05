@@ -51,18 +51,18 @@
     </main>
     <div class="md:grid md:grid-cols-3 max-w-[1024px] mx-auto gap-8">
         <?php foreach($commentaires as $commentaire): ?>
-    
-            <div class="border-solid border border-secondary py-8 md:rounded-lg md:flex flex-col md:items-center md:justify-between ">
-                <h1 class="text-center text-2xl font-bold font-primary"><?php echo $commentaire['nom']?></h1>
-                <p class="text-left text-sm md:text-base py-4 px-4 "><?php echo $commentaire['commentaire']?></p>
-                <div class="flex items-center justify-center ">
-                    <?php for($i = 0; $i < $commentaire['note']; $i++): ?>
-                        <img class="p-2 " src="./image/Vector.png" alt="">
-                    <?php endfor ?>    
+            <?php if($commentaire['valider'] == 1): ?>
+                <div class="border-solid border border-secondary py-8 md:rounded-lg md:flex flex-col md:items-center md:justify-between ">
+                    <h1 class="text-center text-2xl font-bold font-primary"><?php echo $commentaire['nom']?></h1>
+                    <p class="text-left text-sm md:text-base py-4 px-4 "><?php echo $commentaire['commentaire']?></p>
+                    <div class="flex items-center justify-center ">
+                        <?php for($i = 0; $i < $commentaire['note']; $i++): ?>
+                            <img class="p-2 " src="./image/Vector.png" alt="">
+                        <?php endfor ?>    
+                    </div>
+                
                 </div>
-               
-            </div>
-        
+            <?php endif ?>
         <?php endforeach; ?>
     </div>
 </body>
