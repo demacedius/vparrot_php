@@ -49,5 +49,5 @@
             <option value="5">5</option>
         </select>
     </div>
-    <button class="bg-cta text-secondary font-bold font-primary p-2 rounded-full" type="submit">Enregistrez</button>
+    <button class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold font-primary p-2 rounded-full" type="submit">Enregistrez</button>
 </form>

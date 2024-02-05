@@ -1,5 +1,5 @@
-<footer class="text-secondary flex items-center justify-between mx-auto max-w-[1024px] py-24 text-sm md:text-base   ">
-    <div>
+<footer class="text-secondary flex flex-col md:flex-row items-center justify-between md:mx-auto max-w-[1024px] py-24 text-sm md:text-base   ">
+    <div class="pb-16 mb:pb-0">
         <ul>
             <li>lun.: 08:45 - 12:00 , 14:00 - 18:00</li>
             <li>mar.: 08:45 - 12:00 , 14:00 - 18:00</li>
