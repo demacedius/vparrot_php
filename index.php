@@ -65,7 +65,7 @@
             <?php endif ?>
         <?php endforeach; ?>
     </div >
+</body>
 <?php 
     include('includes/footer.php')
 ?>
-</body>

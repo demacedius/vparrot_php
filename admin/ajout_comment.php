@@ -28,26 +28,29 @@
     }
 ?>
 
-<form method="post" class="flex items-center flex-col">
-    <div class="flex flex-col py-4 px-4">
-        <label for="nom">Nom:</label>
-        <input class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="nom" id="nom" placeholder="Entrer votre nom">
-    </div>
+<form method="post" class="flex items-start flex-col">
+    <div class="flex flex-col items-center p-8 gap-4">
 
-    <div class="flex flex-col py-4 px-4">
-        <label for="commentaire" >Commentaire</label>
-        <textarea class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="commentaire" id="commentaire" placeholder="Écrivez votre commentaire ici"></textarea>
+        <div class="flex flex-col ">
+            <label for="nom">Nom:</label>
+            <input class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" name="nom" id="nom" placeholder="Entrer votre nom">
+        </div>
+    
+        <div class="flex flex-col ">
+            <label for="commentaire" >Commentaire</label>
+            <textarea class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="commentaire" id="commentaire" placeholder="Écrivez votre commentaire ici"></textarea>
+        </div>
+    
+        <div class="">
+            <label for="note" class="text-sm font-medium leading-6 text-gray-900">Note</label>
+            <select name="note" id="note"  class=" w-fit rounded-md border-0 py-1.5 text-[#000000] shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
+                <option class="" value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <button class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full" type="submit">Enregistrez</button>
     </div>
-
-    <div class="py-4 px-4">
-        <label for="note" class="block text-sm font-medium leading-6 text-gray-900">Note</label>
-        <select name="note" id="note"  class="block w-fit rounded-md border-0 py-1.5 text-[#000000] shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
-            <option class="" value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-    </div>
-    <button class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold font-primary p-2 rounded-full" type="submit">Enregistrez</button>
 </form>
