@@ -52,7 +52,7 @@
     <div class="md:grid md:grid-cols-3 max-w-[1024px] mx-auto gap-8">
         <?php foreach($commentaires as $commentaire): ?>
     
-            <div class="border-solid border border-secondary py-8 rounded-lg">
+            <div class="border-solid border border-secondary py-8 md:rounded-lg md:flex flex-col md:items-center md:justify-between ">
                 <h1 class="text-center text-2xl font-bold font-primary"><?php echo $commentaire['nom']?></h1>
                 <p class="text-left text-sm md:text-base py-4 px-4 "><?php echo $commentaire['commentaire']?></p>
                 <div class="flex items-center justify-center ">
