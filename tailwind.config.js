@@ -12,7 +12,10 @@ module.exports = {
       primary: ['Raleway', 'sans-serif'],
       secondary :['Open Sans', 'sans-serif']
     },
-    extend: {},
+    
+    extend: {
+      
+    },
   },
   plugins: [],
 }
