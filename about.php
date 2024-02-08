@@ -7,7 +7,7 @@ include_once("includes/header.php");
     <?php
     include_once("includes/nav.php");
     ?>
-    <main class="font-primary lg:max-w-[1024px] lg:mx-auto lg:pt-4 bg-[url('./image/intérieur_ferrari.jpg')] w-full h-full bg-cover bg-center">
+    <main class="font-primary lg:max-w-[1024px] lg:mx-auto lg:pt-4">
 
 
         <h1 class="text-base md:text-xl lg:text-4xl pb-4 md:pb-8">Qui Sommes nous ?</h1>

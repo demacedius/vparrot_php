@@ -13,7 +13,7 @@
                 >A propos</a></li>
         <li class="my-6 md:my-0"><a class="hover:text-cta md:text-lg  lg:text-xl duration-500 md:mx-4" href="#"
                 target="_blank">Nos voiture</a></li>
-        <button class="bg-cta text-secondary font-bold font-primary p-2 rounded-full ">Ce connecter</button>
+        <a href="login.php"><button  class="bg-cta text-secondary font-bold font-primary p-2 rounded-full ">Ce connecter</button></a>
     </ul>
 </nav>
 

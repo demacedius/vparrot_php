@@ -830,10 +830,6 @@ video {
   display: none;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .w-\[this-is\\\\\] {
   width: this-is\\;
 }
@@ -1873,10 +1869,6 @@ video {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
-.bg-\[url\(\'\.\/image\/int\E9rieur_ferrari\.jpg\'\)\] {
-  background-image: url('./image/intérieur_ferrari.jpg');
-}
-
 .decoration-slice {
   -webkit-box-decoration-break: slice;
           box-decoration-break: slice;
@@ -1895,10 +1887,6 @@ video {
 .box-decoration-clone {
   -webkit-box-decoration-break: clone;
           box-decoration-break: clone;
-}
-
-.bg-cover {
-  background-size: cover;
 }
 
 .bg-fixed {
@@ -1928,10 +1916,6 @@ video {
 .bg-clip-text {
   -webkit-background-clip: text;
           background-clip: text;
-}
-
-.bg-center {
-  background-position: center;
 }
 
 .bg-repeat {
