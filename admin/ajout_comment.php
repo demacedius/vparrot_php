@@ -42,7 +42,7 @@
         </div>
     
         <div class="">
-            <label for="note" class="text-sm font-medium leading-6 text-gray-900">Note</label>
+            <label for="note" class="text-sm font-medium leading-6 text-secondary">Note</label>
             <select name="note" id="note"  class=" w-fit rounded-md border-0 py-1.5 text-[#000000] shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" >
                 <option class="" value="1">1</option>
                 <option value="2">2</option>

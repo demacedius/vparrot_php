@@ -3,35 +3,30 @@
 if (!empty($_POST)) {
     if (isset($_POST["email"], $_POST["password"]) && !empty($_POST["password"]) && !empty($_POST["password"])) {
         $email = strip_tags($_POST["email"]);
-        if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-            die("l'adresse email est incorect");
+        if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
+            die("l'adres emai lest incorect");
         }
+
+        $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
         require_once("includes/connect.php");
 
-        $sql = "SELECT * FROM `users` WHERE `email` = :email";
-
+        $sql = "INSERT INTO `users`(`email`,`password`) VALUES (:email, '$password')";
+        
         $query = $db->prepare($sql);
         $query->bindValue(":email", $_POST["email"], PDO::PARAM_STR);
-
-        $query->execute();
-
-        $user = $query->fetch();
-
-        if (!$user) {
-            die("L'utilisateur et/ou le mot de passe sont incorrect");
+        try {
+            $query->execute();
+            
+        } catch (PDOException $e) {
+            die("Erreur d'insertion utilisateur : " . $e->getMessage());
         }
+        
+        $id = $db->lastInsertId();
 
-        if (!password_verify($_POST["password"], $user["password"])) {
-            die("L'utilisateur et/ou le mot de passe sont incorrect");
-        }
-
-        session_start();
-        $_SESSION["user"] = ["id" => $user["id"], "email" => $user["email"]];
-
-        header("location: dashboard.php");
+    }else{
+        die("le formulaire est incomplet");
     }
-
 }
 
 
@@ -57,8 +52,7 @@ include_once("includes/header.php");
                 <input type="password" name="password" id="password" class="text-primary px-4 py-2 rounded-lg ">
             </div>
             <button type="submit"
-                class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full">Ce
-                connecter</button>
+                class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full">Confirmer</button>
         </form>
     </main>
 </body>
