@@ -36,8 +36,7 @@ include_once("includes/header.php");
 
 ?>
 
-<body class="bg-primary text-secondary ">
-    <main class="flex flex-col items-center justify-between gap-8">
+    <div class="flex flex-col items-center justify-between gap-8">
         <h1>inscrire de nouveau employés</h1>
         <form method="post" class="flex flex-col items-center gap-8 border-2 rounded-lg p-8">
             <div class="flex flex-col py-2">
@@ -51,5 +50,4 @@ include_once("includes/header.php");
             <button type="submit"
                 class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full">Confirmer</button>
         </form>
-    </main>
-</body>
+    </div>
