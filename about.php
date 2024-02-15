@@ -1,4 +1,5 @@
 <?php
+session_start();
 $titre = "A propos";
 include_once("includes/header.php");
 ?>

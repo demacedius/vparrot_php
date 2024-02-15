@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if (!empty($_POST)) {
     if (isset($_POST["email"], $_POST["password"]) && !empty($_POST["password"]) && !empty($_POST["password"])) {
@@ -35,13 +36,9 @@ include_once("includes/header.php");
 
 ?>
 
-<body class="bg-primary text-secondary">
-    <?php
-    include_once("includes/nav.php")
-        ?>
-
-    <h1>bienvenue sur votre tableau de bord</h1>
-    <main class="flex flex-col items-center justify-between">
+<body class="bg-primary text-secondary ">
+    <main class="flex flex-col items-center justify-between gap-8">
+        <h1>inscrire de nouveau employés</h1>
         <form method="post" class="flex flex-col items-center gap-8 border-2 rounded-lg p-8">
             <div class="flex flex-col py-2">
                 <label for="email">Email</label>

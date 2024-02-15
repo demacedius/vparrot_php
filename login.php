@@ -1,4 +1,5 @@
 <?php
+     session_start();
 
 if (!empty($_POST)) {
     if (isset($_POST["email"], $_POST["password"]) && !empty($_POST["password"]) && !empty($_POST["password"])) {
@@ -26,7 +27,7 @@ if (!empty($_POST)) {
             die("L'utilisateur et/ou le mot de passe sont incorrect");
         }
 
-        session_start();
+   
         $_SESSION["user"] = ["id" => $user["id"], "email" => $user["email"]];
 
         header("location: dashboard.php");
@@ -61,4 +62,8 @@ include_once("includes/header.php");
                 connecter</button>
         </form>
     </main>
+
+    <?php
+    include_once("includes/footer.php")
+    ?>
 </body>
