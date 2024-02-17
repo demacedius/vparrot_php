@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once("includes/connect.php");
+session_start();
 
 $sql = "SELECT * FROM `commentaire`";
 
@@ -47,6 +47,7 @@ include_once("includes/header.php");
         </div>
     </main>
     <?php
-    include_once('includes/footer.php');
+    include("includes/footer.php");
     ?>
 </body>
+</html>

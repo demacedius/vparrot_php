@@ -15,7 +15,5 @@
         <?php
             include("admin/ajout_comment.php");
         ?>
-        
     </div>
 </footer>
-</html>

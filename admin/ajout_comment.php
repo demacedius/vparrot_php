@@ -15,7 +15,7 @@
 
             $query->bindValue(":nom", $nom, PDO::PARAM_STR);
             $query->bindValue(":commentaire", $commentaires, PDO::PARAM_STR);
-            $query->bindValue("note", $note, PDO::PARAM_INT);
+            $query->bindValue(":note", $note, PDO::PARAM_INT);
 
             if( !$query->execute() ){
                 die("Une erreur c'est produite");
