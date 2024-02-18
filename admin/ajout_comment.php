@@ -7,7 +7,7 @@
             $commentaires = htmlspecialchars($_POST["commentaire"]);
             $note = strip_tags($_POST["note"]);
 
-            require_once("includes/connect.php");
+           
 
             $sql = "INSERT INTO `commentaire` (`nom`, `commentaire`, `note`) VALUES (:nom, :commentaire, :note )";
 

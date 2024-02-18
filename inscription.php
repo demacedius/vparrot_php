@@ -25,8 +25,6 @@ if (!empty($_POST)) {
         
         $id = $db->lastInsertId();
 
-    }else{
-        die("le formulaire est incomplet");
     }
 }
 

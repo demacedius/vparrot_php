@@ -1,5 +1,5 @@
 <?php
-include_once("includes/connect.php");
+require("includes/connect.php");
 
 if (isset($_POST["sub"])) {
     $prix = $_POST["prix"];
@@ -53,25 +53,43 @@ if (isset($_POST["sub"])) {
 <div>
 
     <h2>Ajouter une annonce de voiture d'occasion</h2>
-    <form method="POST" enctype="multipart/form-data">
-        <label for="nom">Nom de la voiture :</label>
-        <input type="text" name="nom" id="nom" required><br>
+    <form method="POST" enctype="multipart/form-data"
+        class="flex flex-col items-left border-2 rounded-lg p-8 text-primary">
+        <div class="flex flex-col py-2">
 
-        <label for="description">description technique</label>
-        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+            <label class="text-secondary text-lg font-secondary font-bold" for="name">Nom de la voiture :</label>
+            <input type="text" name="nom" id="name" required class="md:rounded-lg"><br>
+        </div>
+        <div class="flex flex-col py-2">
 
-        <label for="prix">Prix :</label>
-        <input type="text" name="prix" id="prix" required><br>
+            <label class="text-secondary text-lg font-secondary font-bold" for="description">description
+                technique</label>
+            <textarea name="description" id="description" cols="30" rows="10" class="md:rounded-lg"></textarea>
+        </div>
+        <div class="flex flex-col py-2">
 
-        <label for="kilometrage">Kilométrage :</label>
-        <input type="text" name="kilometrage" id="kilometrage" required><br>
+            <label class="text-secondary text-lg font-secondary font-bold" for="prix">Prix :</label>
+            <input type="text" name="prix" id="prix" required class="md:rounded-lg"><br>
+        </div>
 
-        <label for="annee">Année de mise en circulation :</label>
-        <input type="text" name="annee" id="annee" required><br>
+        <div class="flex flex-col py-2">
 
-        <label for="image">Image mise en avant :</label>
-        <input type="file" name="image" id="image" accept="image/*" required><br>
+            <label class="text-secondary text-lg font-secondary font-bold" for="kilometrage">Kilométrage :</label>
+            <input type="text" name="kilometrage" id="kilometrage" required class="md:rounded-lg"><br>
+        </div>
+        <div class="flex flex-col py-2">
 
-        <input type="submit" name="sub" value="Envoyer">
+            <label class="text-secondary text-lg font-secondary font-bold" for="annee">Année de mise en circulation
+                :</label>
+            <input type="text" name="annee" id="annee" required class="md:rounded-lg"><br>
+        </div>
+        <div class="flex flex-col py-2">
+
+            <label class="block mb-2 text-sm font-medium text-secondary dark:text-white" for="image">Image mise en avant :</label>
+            <input type="file" name="image" id="image" accept="image/*" required class="block w-full text-md text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-500 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 md:rounded-lg"> photo de couverture<br>
+        </div>
+
+        <button type="submit" name="sub"
+            class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full">Confirmer</button>
     </form>
 </div>
