@@ -2,13 +2,21 @@
 session_start();
 require_once("includes/connect.php");
 
-$sql = "SELECT * FROM `voiture`";
+$tri = isset($_GET['tri']) ? $_GET['tri'] : 'nom';
+
+$triValide = in_array($tri, ['nom', 'prix', 'kilometrage', 'annee']);
+
+if (!$triValide) {
+    $tri = 'nom';
+}
+
+$sql = "SELECT * FROM `voiture` ORDER BY $tri";
 
 $requete = $db->query($sql);
 
 $voitures = $requete->fetchAll();
 
-$titre = 'accueil';
+$titre = 'nos_voiture';
 
 include("includes/header.php");
 
@@ -16,12 +24,17 @@ include("includes/header.php");
 
 ?>
 
-<body class="bg-primary text-secondary">
+<body class="bg-primary text-secondary ">
     <?php
     include_once("includes/nav.php");
     ?>
-    <main>
-
+    <main class="max-w-[1024px] mx-auto">
+    <div class="flex items-center justify-evenly p-8">
+            <a class="bg-cta hover:bg-ctaHover p-4 rounded-lg" href="?tri=nom" class="text-secondary mr-4">Nom</a>
+            <a class="bg-cta hover:bg-ctaHover p-4 rounded-lg" href="?tri=prix" class="text-secondary mr-4">Prix</a>
+            <a class="bg-cta hover:bg-ctaHover p-4 rounded-lg" href="?tri=kilometrage" class="text-secondary mr-4">Kilométrage</a>
+            <a class="bg-cta hover:bg-ctaHover p-4 rounded-lg" href="?tri=annee" class="text-secondary">Année</a>
+        </div>
         <div class="md:grid md:grid-cols-3 max-w-[1024px] mx-auto gap-8 ">
             <?php foreach ($voitures as $voiture): ?>
                 <div class="border-solid border border-secondary md:rounded-lg md:flex flex-col md:items-left md:justify-between md:p-8">
