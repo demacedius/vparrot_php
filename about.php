@@ -9,9 +9,13 @@ include_once("includes/header.php");
     include_once("includes/nav.php");
     ?>
     <main class="font-primary lg:max-w-[1024px] lg:mx-auto lg:pt-4">
+        <div class="flex items-center flex-col md:flex-row justify-evenly">
+            
+                    <img class="p-8" src="image/logo_vparrot.png" alt="logo de l'entreprise">
+                    <H1 class="font-primary text-3xl font-bold">Garage Vincent Parrot</H1>
+        </div>
 
-
-        <h1 class="text-base md:text-xl lg:text-4xl pb-4 md:pb-8">Qui Sommes nous ?</h1>
+        <h2 class="text-base md:text-xl lg:text-4xl pb-4 md:pb-8">Qui Sommes nous ?</h2>
 
         <section class="flex flex-col gap-8 text-sm md:text-base">
 
