@@ -11,8 +11,8 @@
                 href="index.php">Acceuil</a></li>
         <li class="my-6 md:my-0"><a class="hover:text-cta md:text-lg  lg:text-xl duration-500 md:mx-4"
                 href="about.php">A propos</a></li>
-        <li class="my-6 md:my-0"><a class="hover:text-cta md:text-lg  lg:text-xl duration-500 md:mx-4" href="#"
-                target="_blank">Nos voiture</a>
+        <li class="my-6 md:my-0"><a class="hover:text-cta md:text-lg  lg:text-xl duration-500 md:mx-4" href="nos_voiture.php"
+                target="">Nos voiture</a>
         </li>
         <?php if (isset($_SESSION["user"])): ?>
             <li class="my-6 md:my-0"><a href="dashboard.php" class="hover:text-cta md:text-lg  lg:text-xl duration-500 md:mx-4">tableau de bord</a></li>

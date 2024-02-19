@@ -46,8 +46,8 @@ include_once("includes/header.php");
     include_once("includes/nav.php")
         ?>
 
-    <h1>bienvenue sur votre tableau de bord</h1>
-    <main class="flex flex-col items-center justify-between">
+<main class="flex flex-col items-center justify-between">
+        <h1 class="font-primary font-bold text-xl p-8 ">bienvenue sur votre tableau de bord</h1>
         <form method="post" class="flex flex-col items-center gap-8 border-2 rounded-lg p-8">
             <div class="flex flex-col py-2">
                 <label for="email">Email</label>

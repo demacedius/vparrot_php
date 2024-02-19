@@ -1,5 +1,5 @@
 <?php
-    if(!empty($_POST)){
+    if(isset($_POST["comment"])){
 
         if(isset($_POST["nom"], $_POST["commentaire"]) && !empty($_POST["nom"]) && !empty($_POST["commentaire"])){
 
@@ -7,7 +7,7 @@
             $commentaires = htmlspecialchars($_POST["commentaire"]);
             $note = strip_tags($_POST["note"]);
 
-           
+           require("includes/connect.php");
 
             $sql = "INSERT INTO `commentaire` (`nom`, `commentaire`, `note`) VALUES (:nom, :commentaire, :note )";
 
@@ -22,9 +22,9 @@
             }
 
             $id= $db->lastInsertId();
-            
+         
         }else{
-            die("Le formulaire n'est pas complet") ;
+            die("le formulaire est incomplet");
         }
     }
 ?>
@@ -52,6 +52,6 @@
                 <option value="5">5</option>
             </select>
         </div>
-        <button class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full" type="submit">Enregistrez</button>
+        <button class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full" name="comment" type="submit">Enregistrez</button>
     </div>
 </form>

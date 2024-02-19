@@ -9,7 +9,7 @@ if (!empty($_POST)) {
             die("ce n'est pas une adresse email");
         }
 
-        require("../includes/connect.php");
+        require("includes/connect.php");
 
         $sql = "SELECT * FROM `users` WHERE `email` = :email";
 
@@ -36,7 +36,7 @@ if (!empty($_POST)) {
             "email" => $user["email"]
         ];
 
-        var_dump($_SESSION);
+        
     }
 }
 ?>

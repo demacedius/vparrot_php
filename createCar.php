@@ -1,3 +1,4 @@
+
 <?php
 require("includes/connect.php");
 
@@ -12,10 +13,10 @@ if (isset($_POST["sub"])) {
         $dossier = 'uploads/';
         $temp_name = $_FILES['image']['tmp_name'];
         if (!is_uploaded_file($temp_name)) {
-            exit('le fichier est introuvable');
+            die('Le fichier est introuvable');
         }
-        if ($_FILES['image']['size'] >= 2000000) {
-            exit("Erreur: le fichier est trop volumineux");
+        if ($_FILES['image']['size'] >= 20000000) {
+            die("Erreur : le fichier est trop volumineux");
         }
 
         $infofichier = pathinfo($_FILES['image']['name']);
@@ -24,16 +25,16 @@ if (isset($_POST["sub"])) {
         $extension_upload = strtolower($extension_upload);
         $extension_autorisee = array('png', 'jpg', 'jpeg');
         if (!in_array($extension_upload, $extension_autorisee)) {
-            exit(`Veuillez inserer une image s'il vous plait`);
+            die('Veuillez insérer une image s\'il vous plaît');
         }
         $nom_photo = $nom . "." . $extension_upload;
 
         if (!move_uploaded_file($temp_name, $dossier . $nom_photo)) {
-            $error_message = ("Probleme dans le téléchargement de l'image réessayez");
+            $error_message = ("Problème dans le téléchargement de l'image, réessayez");
             if ($error = error_get_last()) {
                 $error_message .= " Détails de l'erreur : " . print_r($error, true);
             }
-            exit($error_message);
+            die($error_message);
         }
 
         $ph_name = $nom_photo;
@@ -43,11 +44,12 @@ if (isset($_POST["sub"])) {
         $query->execute();
         $id = $db->lastInsertId();
 
-        header('location: index.php');
+        echo "Voiture ajoutée avec succès";
 
+        header('location: index.php');
+        exit();
     }
 }
-
 ?>
 
 <div>
