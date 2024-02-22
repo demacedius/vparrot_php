@@ -35,12 +35,12 @@ $username = "root"; // a modifier
 $password = "Amandine2412."; //A modifier
 ```
 ```bash
-php admin/creerBdd.php
+php ./admin/creerBdd.php
 ```
 
 
 ```bash
-php admin/create_admin.php
+php ./admin/create_admin.php
 ```
 > A noter que le mot de passe de l'administrateur et azerty
 
