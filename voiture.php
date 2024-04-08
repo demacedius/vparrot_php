@@ -1,7 +1,15 @@
 <?php
 session_start();
-require_once("includes/connect.php");
+require_once("includes/database.php");
+require_once("classe/annonce.php");
+require_once("classe/messageUtilistateur.php");
+require_once("classe/template.php");
 
+$dbInstance = new Database();
+$db = $dbInstance->getConnection();
+
+$annonceInstance = new Annonce($db);
+$messageInstance = new MessageUtilisateur($db);
 
 if (!empty($_POST)) {
     if (isset($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["telephone"], $_POST["message"], $_POST["voiture_id"]) && 
@@ -15,45 +23,24 @@ if (!empty($_POST)) {
         $telephone = strip_tags($_POST["telephone"]);
         $voiture_id = $_POST["voiture_id"];
 
-        $sql = "INSERT INTO `messageUtilisateur` (`nom`, `prenom`, `email`, `telephone`, `message`, `voiture_id`) 
-                VALUES (:nom, :prenom, :email, :telephone, :message, :voiture_id)";
-
-        $query = $db->prepare($sql);
-
-        $query->bindValue(":email", $email, PDO::PARAM_STR);
-        $query->bindValue(":message", $message, PDO::PARAM_STR); 
-        $query->bindValue(":nom", $nom, PDO::PARAM_STR);
-        $query->bindValue(":prenom", $prenom, PDO::PARAM_STR);
-        $query->bindValue(":telephone", $telephone, PDO::PARAM_STR);
-        $query->bindValue(":voiture_id", $voiture_id, PDO::PARAM_INT);
-
-        if (!$query->execute()) {
-            die("Une erreur s'est produite");
-        }
+        $messageInstance->insertMessage($nom, $prenom, $email, $telephone, $message, $voiture_id);
 
         $id = $db->lastInsertId();
     }
 }
 
-
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $annonce_id = $_GET['id'];
 
-    $sql = "SELECT * FROM `voiture` WHERE `id` = :annonce_id";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':annonce_id', $annonce_id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $annonce = $stmt->fetch();
+    $annonce = $annonceInstance->getAnnonceById($annonce_id);
 
     if ($annonce) {
         $titre = $annonce['nom'];
-        include("includes/header.php");
-
-        ?>
+        Template::header($titre);
+?>
 
         <body class="bg-primary text-secondary">
-            <?php include_once("includes/nav.php"); ?>
+            <?php Template::nav(); ?>
             <main>
                 <div class="md:grid md:grid-cols-2 max-w-[1024px] mx-auto gap-8 items-center md:pt-8">
                     <img class="md:border-2 md:rounded-lg" src="uploads/<?php echo $annonce['image']; ?>"
@@ -94,7 +81,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 ?>
             </main>
 
-            <?php include_once('includes/footer.php'); ?>
+            <?php Template::footer(); ?>
         </body>
         <?php
     } else {
