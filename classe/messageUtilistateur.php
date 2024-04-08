@@ -19,4 +19,4 @@ class MessageUtilisateur {
         return $query->execute();
     }
 }
-?>
+
