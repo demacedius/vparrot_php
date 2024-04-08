@@ -1,35 +1,27 @@
 <?php
 session_start();
-require_once("includes/connect.php");
+require_once("includes/database.php");
+require_once("classe/voiture.php");
+require_once("classe/template.php");
+
+$dbInstance = new Database();
+$db = $dbInstance->getConnection();
+
+$voitureInstance = new Voiture($db);
 
 $tri = isset($_GET['tri']) ? $_GET['tri'] : 'nom';
 
-$triValide = in_array($tri, ['nom', 'prix', 'kilometrage', 'annee']);
-
-if (!$triValide) {
-    $tri = 'nom';
-}
-
-$sql = "SELECT * FROM `voiture` ORDER BY $tri";
-
-$requete = $db->query($sql);
-
-$voitures = $requete->fetchAll();
+$voitures = $voitureInstance->getAllVoitures($tri);
 
 $titre = 'nos_voiture';
 
-include("includes/header.php");
-
-
-
+Template::header($titre);
 ?>
 
 <body class="bg-primary text-secondary ">
-    <?php
-    include_once("includes/nav.php");
-    ?>
+    <?php Template::nav(); ?>
     <main class="max-w-[1024px] mx-auto">
-    <div class="flex items-center justify-evenly p-8">
+        <div class="flex items-center justify-evenly p-8">
             <a class="bg-cta hover:bg-ctaHover p-4 rounded-lg" href="?tri=nom" class="text-secondary mr-4">Nom</a>
             <a class="bg-cta hover:bg-ctaHover p-4 rounded-lg" href="?tri=prix" class="text-secondary mr-4">Prix</a>
             <a class="bg-cta hover:bg-ctaHover p-4 rounded-lg" href="?tri=kilometrage" class="text-secondary mr-4">Kilométrage</a>
@@ -76,7 +68,5 @@ include("includes/header.php");
             <?php endforeach; ?>
         </div>
     </main>
-    <?php
-    include_once('includes/footer.php');
-    ?>
+    <?php Template::footer(); ?>
 </body>
