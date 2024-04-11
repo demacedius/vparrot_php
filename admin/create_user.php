@@ -8,7 +8,7 @@ if (!empty($_POST)) {
         $dbInstance = new Database();
         $db = $dbInstance->getConnection();
 
-        $auth = new Authentification($db);
+        $auth = new AuthController($db);
         $result = $auth->login($_POST["email"], $_POST["password"]);
 
         if ($result === true) {
