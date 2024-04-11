@@ -1,6 +1,13 @@
-
 <?php
-require("includes/connect.php");
+session_start();
+require_once("includes/database.php");
+require_once("classe/voiture_manager.php");
+require_once("classe/template.php");
+
+$dbInstance = new Database();
+$db = $dbInstance->getConnection();
+
+$voitureManager = new VoitureManager($db);
 
 if (isset($_POST["sub"])) {
     $prix = $_POST["prix"];
@@ -10,46 +17,26 @@ if (isset($_POST["sub"])) {
     $annee = $_POST["annee"];
 
     if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-        $dossier = 'uploads/';
-        $temp_name = $_FILES['image']['tmp_name'];
-        if (!is_uploaded_file($temp_name)) {
-            die('Le fichier est introuvable');
+        // Traitement de l'image
+        $uploadDir = 'uploads/';
+        $uploadFile = $uploadDir . basename($_FILES['image']['name']);
+
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+            $image = basename($_FILES['image']['name']);
+
+            // Ajout de la voiture
+            $voitureManager->addVoiture($prix, $nom, $description, $kilometrage, $annee, $image);
+
+            echo "Voiture ajoutée avec succès";
+
+            header('location: index.php');
+            exit();
+        } else {
+            echo "Erreur lors de l'upload du fichier";
         }
-        if ($_FILES['image']['size'] >= 20000000) {
-            die("Erreur : le fichier est trop volumineux");
-        }
-
-        $infofichier = pathinfo($_FILES['image']['name']);
-        $extension_upload = $infofichier['extension'];
-
-        $extension_upload = strtolower($extension_upload);
-        $extension_autorisee = array('png', 'jpg', 'jpeg');
-        if (!in_array($extension_upload, $extension_autorisee)) {
-            die('Veuillez insérer une image s\'il vous plaît');
-        }
-        $nom_photo = $nom . "." . $extension_upload;
-
-        if (!move_uploaded_file($temp_name, $dossier . $nom_photo)) {
-            $error_message = ("Problème dans le téléchargement de l'image, réessayez");
-            if ($error = error_get_last()) {
-                $error_message .= " Détails de l'erreur : " . print_r($error, true);
-            }
-            die($error_message);
-        }
-
-        $ph_name = $nom_photo;
-
-        $sql = "INSERT INTO `voiture` (`prix`,`kilometrage`,`annee`,`image`,`nom`,`description`) VALUES ('$prix','$kilometrage','$annee','$ph_name','$nom', '$description')";
-        $query = $db->prepare($sql);
-        $query->execute();
-        $id = $db->lastInsertId();
-
-        echo "Voiture ajoutée avec succès";
-
-        header('location: index.php');
-        exit();
     }
 }
+
 ?>
 
 <div>
@@ -95,3 +82,5 @@ if (isset($_POST["sub"])) {
             class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full">Confirmer</button>
     </form>
 </div>
+
+
