@@ -18,4 +18,4 @@ class CommentaireManager {
         $stmt->execute([$commentaire_id]);
     }
 }
-?>
+
