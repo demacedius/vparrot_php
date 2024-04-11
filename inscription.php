@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["subUser"])) {
     }
 }
 
-include_once("includes/header.php");
+Template::header("inscription")
 ?>
 
 <div class="flex flex-col items-center justify-between gap-8">
