@@ -17,4 +17,4 @@ class Voiture {
         return $requete->fetchAll();
     }
 }
-?>
+

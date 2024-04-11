@@ -7,7 +7,7 @@ class MessageUtilisateur {
     }
 
     public function insertMessage($nom, $prenom, $email, $telephone, $message, $voiture_id) {
-        $sql = "INSERT INTO `messageUtilisateur` (`nom`, `prenom`, `email`, `telephone`, `message`, `voiture_id`) 
+        $sql = "INSERT INTO `messageUtilisateur` (`nom`, `prenom`, `email`, `numero_telephone`, `message`, `voiture_id`) 
                 VALUES (:nom, :prenom, :email, :telephone, :message, :voiture_id)";
         $query = $this->db->prepare($sql);
         $query->bindValue(":nom", $nom, PDO::PARAM_STR);

@@ -1,23 +1,21 @@
 <?php
 session_start();
-require_once("includes/connect.php");
+require_once ("includes/database.php");
+require_once ("classe/commentaire.php");
+require_once ("classe/template.php");
 
-$sql = "SELECT * FROM `commentaire`";
+$database = new Database();
+$db = $database->getConnection();
 
-$requete = $db->query($sql);
-
-$commentaires = $requete->fetchAll();
+$commentaire = new Commentaire($db);
+$commentaires = $commentaire->getAllValides();
 
 $titre = 'accueil';
-
-include("includes/header.php");
-
-
-
+Template::header("garage Vincent Parrot");
+Template::nav();
 ?>
 
-<body class="bg-primary text-secondary ">
-    <?php include("includes/nav.php"); ?>
+<body class="bg-primary text-secondary">
     <main class="lg:max-w-[1024px] lg:mx-auto lg:pt-4">
         <header class="md:flex md:items-center">
             <img src="./image/voiture_collection.jpg" alt="une voiture de collection dans un garage">
@@ -56,32 +54,29 @@ include("includes/header.php");
                 <img class="w-full py-4" src="./image/avant_lomborghini.png" alt="">
 
             </div>
+            <div class="md:grid md:grid-cols-3 max-w-[1024px] mx-auto gap-8">
+                <?php foreach ($commentaires as $commentaire): ?>
+                    <div
+                        class="border-solid border border-secondary py-8 md:rounded-lg md:flex flex-col md:items-center md:justify-between">
+                        <h1 class="text-center text-2xl font-bold font-primary">
+                            <?php echo $commentaire['nom'] ?>
+                        </h1>
+                        <p class="text-left text-sm md:text-base py-4 px-4 ">
+                            <?php echo $commentaire['commentaire'] ?>
+                        </p>
+                        <div class="flex items-center justify-center ">
+                            <?php for ($i = 0; $i < $commentaire['note']; $i++): ?>
+                                <img class="p-2 " src="./image/Vector.png" alt="">
+                            <?php endfor ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </section>
 
     </main>
-    <div class="md:grid md:grid-cols-3 max-w-[1024px] mx-auto gap-8">
-        <?php foreach ($commentaires as $commentaire): ?>
-            <?php if ($commentaire['valider'] == 1): ?>
-                <div
-                    class="border-solid border border-secondary py-8 md:rounded-lg md:flex flex-col md:items-center md:justify-between ">
-                    <h1 class="text-center text-2xl font-bold font-primary">
-                        <?php echo $commentaire['nom'] ?>
-                    </h1>
-                    <p class="text-left text-sm md:text-base py-4 px-4 ">
-                        <?php echo $commentaire['commentaire'] ?>
-                    </p>
-                    <div class="flex items-center justify-center ">
-                        <?php for ($i = 0; $i < $commentaire['note']; $i++): ?>
-                            <img class="p-2 " src="./image/Vector.png" alt="">
-                        <?php endfor ?>
-                    </div>
 
-                </div>
-            <?php endif ?>
-        <?php endforeach; ?>
-    </div>
-<?php
-include('includes/footer.php')
-?>
+    <?php Template::footer() ?>
 </body>
+
 </html>
