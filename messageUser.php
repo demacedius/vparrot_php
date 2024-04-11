@@ -1,49 +1,45 @@
 <?php
 session_start();
-require_once("includes/connect.php");
+require_once ("includes/connect.php");
+require_once ("classe/messageUtilistateur.php");
+
 if (isset($_POST["subMessage"])) {
-    if (
-        isset($_POST["nom"], $_POST["prenom"], $_POST["email"], $_POST["numero_telephone"], $_POST["message"], $_POST["voiture_id"]) &&
-        !empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["email"]) &&
-        !empty($_POST["numero_telephone"]) && !empty($_POST["message"]) && !empty($_POST["voiture_id"])
-    ) {
-
-        $email = strip_tags($_POST["email"]);
-        $message = htmlspecialchars($_POST["message"]);
-        $nom = strip_tags($_POST["nom"]);
-        $prenom = strip_tags($_POST["prenom"]);
-        $telephone = strip_tags($_POST["numero_telephone"]);
-        $voiture_id = $_POST["voiture_id"];
-
-        $sql = "INSERT INTO messageUtilisateur (`nom`, `prenom`, `email`, `numero_telephone`, `message`, `voiture_id`) 
-                VALUES (:nom, :prenom, :email, :numero_telephone, :message, :voiture_id)";
-
-        echo "Email: " . $email . "<br>";
-        echo "Message: " . $message . "<br>";
-        echo "Nom: " . $nom . "<br>";
-        echo "Prénom: " . $prenom . "<br>";
-        echo "Téléphone: " . $telephone . "<br>";
-        echo "Voiture ID: " . $voiture_id . "<br>";
-
-
-        $query = $db->prepare($sql);
-
-        $query->bindValue(":email", $email, PDO::PARAM_STR);
-        $query->bindValue(":message", $message, PDO::PARAM_STR);
-        $query->bindValue(":nom", $nom, PDO::PARAM_STR);
-        $query->bindValue(":prenom", $prenom, PDO::PARAM_STR);
-        $query->bindValue(":numero_telephone", $telephone, PDO::PARAM_STR);
-        $query->bindValue(":voiture_id", $voiture_id, PDO::PARAM_INT);
-
-        if (!$query->execute()) {
-            die("Erreur d'exécution de la requête : " . print_r($query->errorInfo(), true));
+    // Vérification des champs
+    $requiredFields = ["nom", "prenom", "email", "numero_telephone", "message", "voiture_id"];
+    foreach ($requiredFields as $field) {
+        if (!isset($_POST[$field]) || empty($_POST[$field])) {
+            die("Le champ $field est requis");
         }
-
-        $id = $db->lastInsertId();
     }
-}
 
+    // Récupération des données du formulaire
+    $nom = strip_tags($_POST["nom"]);
+    $prenom = strip_tags($_POST["prenom"]);
+    $email = strip_tags($_POST["email"]);
+    $telephone = strip_tags($_POST["numero_telephone"]);
+    $message = htmlspecialchars($_POST["message"]);
+    $voiture_id = $_POST["voiture_id"];
+
+
+
+    // Création d'une instance de la classe MessageUtilisateur
+    $messageUtilisateur = new MessageUtilisateur($db);
+
+    $result = $messageUtilisateur->insertMessage($nom, $prenom, $email, $telephone, $message, $voiture_id);
+
+    // Vérification du résultat de l'insertion
+    // Exécute la requête SQL
+    if ($result === true) {
+        echo "<script>alert('Message enregistré avec succès');</script>";
+
+    } else {
+        echo "<script>alert('Erreur lors de l\\'enregistrement du message');</script>";
+
+    }
+
+}
 ?>
+
 <section>
     <form method="POST">
         <div class="flex flex-col items-left p-8 gap-4 max-w-[1024px] mx-auto">
@@ -64,13 +60,15 @@ if (isset($_POST["subMessage"])) {
                 <label for="email">email:</label>
                 <input
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    type="text" name="email" id="email" placeholder="Entrer votre adresse mail">
+                    type="text" name="email" id="email" placeholder="Entrer votre adresse mail" required
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
             </div>
             <div class="flex flex-col ">
                 <label for="telephone">téléphone:</label>
                 <input
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    type="text" name="numero_telephone" id="telephone" placeholder="Entrer votre numéro de téléhone">
+                    type="text" name="numero_telephone" id="telephone" placeholder="Entrer votre numéro de téléphone"
+                    required pattern="[0-9]+" maxlength="10">
             </div>
             <div class="flex flex-col ">
                 <label for="commentaire">Commentaire</label>
@@ -80,7 +78,7 @@ if (isset($_POST["subMessage"])) {
             </div>
             <button
                 class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full"
-                type="submit" name="subMessage">Enregistrez</button>
+                type="submit" name="subMessage">Enregistrer</button>
         </div>
     </form>
 </section>
