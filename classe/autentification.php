@@ -6,10 +6,13 @@ class AuthController
 {
     public static function login()
     {
-        session_start();
+        // Check if the session is already started
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
         if (!empty($_POST)) {
-            if (isset($_POST["email"], $_POST["password"]) && !empty($_POST["password"]) && !empty($_POST["password"])) {
+            if (isset($_POST["email"], $_POST["password"]) && !empty($_POST["email"]) && !empty($_POST["password"])) {
                 $email = strip_tags($_POST["email"]);
                 if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
                     die("l'adresse email est incorrecte");
@@ -23,7 +26,8 @@ class AuthController
 
                 $_SESSION["user"] = ["id" => $user["id"], "email" => $user["email"]];
 
-                header("location: dashboard.php");
+                header("Location: ../dashboard.php");
+                exit();
             }
         }
     }

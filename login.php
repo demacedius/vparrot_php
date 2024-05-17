@@ -1,16 +1,17 @@
 <?php
 
-include_once("includes/header.php");
-include_once("classe/autentification.php");
+include_once __DIR__ . '/includes/header.php';
+include_once __DIR__ . 'classe/autentification.php';
 
 ?>
 
 <body class="bg-primary text-secondary">
-    <?php include_once("includes/nav.php"); ?>
+    <?php include_once ("includes/nav.php"); ?>
 
     <main class="flex flex-col items-center justify-between">
         <h1 class="font-primary font-bold text-xl p-8 ">Bienvenue sur votre tableau de bord</h1>
-        <form method="post" class="flex flex-col items-center gap-8 border-2 rounded-lg p-8">
+        <form method="post" action="classe/authentification.php" class="flex flex-col items-center gap-8 border-2 rounded-lg p-8">
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
             <div class="flex flex-col py-2">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" class="text-primary px-4 py-2 rounded-lg ">
@@ -23,8 +24,8 @@ include_once("classe/autentification.php");
         </form>
     </main>
 
-    <?php include_once("includes/footer.php"); ?>
+    <?php include_once ("includes/footer.php"); ?>
 
-    <?php AuthController::login(); ?>
+    
 </body>
 </html>

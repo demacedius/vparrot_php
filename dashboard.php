@@ -1,8 +1,8 @@
 <?php
-require_once ("includes/database.php");
-require_once ("classe/commentaire_manager.php");
-require_once ("classe/message_utilisateur_manager.php");
-require_once ("classe/template.php");
+require_once 'includes/database.php';
+require_once 'classe/commentaire_manager.php';
+require_once 'classe/message_utilisateur_manager.php';
+require_once 'classe/template.php';
 
 $dbInstance = new Database();
 $db = $dbInstance->getConnection();
