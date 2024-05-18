@@ -1,6 +1,7 @@
 <?php
 
-include_once 'header.php';
+
+include_once 'function.php';
 
 // Start the session if not already started
 if (session_status() == PHP_SESSION_NONE) {

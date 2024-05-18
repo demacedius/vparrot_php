@@ -1,20 +1,24 @@
 <?php
-class Voiture {
-    private $db;
+class Voiture
+{
+    private $conn;
+    private $table_name = "voiture";
 
-    public function __construct($db) {
-        $this->db = $db;
+    public function __construct($db)
+    {
+        $this->conn = $db;
     }
 
-    public function getAllVoitures($tri) {
-        $triValide = in_array($tri, ['nom', 'prix', 'kilometrage', 'annee']);
-        if (!$triValide) {
-            $tri = 'nom';
+    public function getAllVoitures($tri)
+    {
+        $query = "SELECT * FROM " . $this->table_name . " ORDER BY " . $tri;
+        $stmt = $this->conn->query($query);
+
+        $voitures = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $voitures[] = $row;
         }
 
-        $sql = "SELECT * FROM `voiture` ORDER BY $tri";
-        $requete = $this->db->query($sql);
-        return $requete->fetchAll();
+        return $voitures;
     }
 }
-
