@@ -30,7 +30,7 @@ if (!empty($_POST)) {
             <div class="mb-4">
                 <label for="email" class="block  text-sm font-bold mb-2">Email:</label>
                 <input type="email" id="email" name="email" class="border text-primary rounded px-3 py-2 w-full"
-                    required>
+                    required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
             </div>
             <div class="mb-4">
                 <label for="password" class="block  text-sm font-bold mb-2">Mot de passe:</label>
