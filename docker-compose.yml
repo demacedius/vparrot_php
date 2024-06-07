@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      DBHOST: db
+      DBUSER: root
+      DBPASSWORD: Amandine2412.
+      DBDATABASE: deMacedo_ecf
+    depends_on:
+      - db
+    command: >
+      sh -c 'while ! nc -z db 3306;
+             do echo "Waiting for MySQL...";
+             sleep 1;
+             done;
+             apache2-foreground'
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Amandine2412.
+      MYSQL_DATABASE: deMacedo_ecf
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

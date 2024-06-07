@@ -1,9 +1,9 @@
 <?php
 
-define("DBHOST","127.0.0.1");
-define("DBUSER","root");
-define("DBPASS","Amandine2412.");
-define("DBNAME","deMacedo_ecf");
+define("DBHOST", getenv('DBHOST'));
+define("DBUSER", getenv('DBUSER'));
+define("DBPASS", getenv('DBPASSWORD'));
+define("DBNAME", getenv('DBDATABASE'));
 
 $dsn = "mysql:dbname=" . DBNAME . ";host=" . DBHOST . ";port=3306";
 
