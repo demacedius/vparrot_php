@@ -1,9 +1,9 @@
 <?php
 
-define("DBHOST", getenv('DBHOST'));
-define("DBUSER", getenv('DBUSER'));
-define("DBPASS", getenv('DBPASSWORD'));
-define("DBNAME", getenv('DBDATABASE'));
+define("DBHOST","db5015928952.hosting-data.io");
+define("DBUSER","dbu4637891");
+define("DBPASS","L337(0[)e43v3r");
+define("DBNAME","dbs12982473");
 
 $dsn = "mysql:dbname=" . DBNAME . ";host=" . DBHOST . ";port=3306";
 
