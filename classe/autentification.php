@@ -22,6 +22,8 @@ class AuthController
 
                 if (!$user) {
                     die("L'utilisateur et/ou le mot de passe sont incorrects");
+                    echo (error_log());
+                    echo($user);
                 }
 
                 $_SESSION["user"] = ["id" => $user["id"], "email" => $user["email"]];
