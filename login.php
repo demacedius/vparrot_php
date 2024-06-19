@@ -1,7 +1,7 @@
 <?php
 
 include_once __DIR__ . '/includes/header.php';
-include_once __DIR__ . 'classe/autentification.php';
+include_once __DIR__ . '/classe/autentification.php';
 
 ?>
 
