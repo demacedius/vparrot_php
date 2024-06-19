@@ -1,0 +1,22 @@
+name: Deploy to IONOS
+
+on:
+  push:
+    branches:
+      - main  # Déclencher l'action sur les pushs vers la branche main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy via SFTP
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        ARGS: "-rltgoDzvO --delete"
+        SOURCE: "./"  # Assurez-vous que ceci pointe vers le bon répertoire dans votre dépôt
+        TARGET: "u116823828@access1010324177.webspace-data.io:/path/to/remote/site"
