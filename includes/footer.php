@@ -13,7 +13,7 @@
 
     <div class="border-2 border-solid rounded-2xl flex items-center flex-col">
         <?php
-            include("admin/ajout_comment.php");
+            include "admin/ajout_comment.php";
         ?>
     </div>
 </footer>

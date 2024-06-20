@@ -1,13 +1,13 @@
 <?php
 session_start();
-require_once ("includes/database.php");
-require_once ("classe/commentaire.php");
-require_once ("classe/template.php");
+require_once "includes/database.php";
+require_once "classe/commentaire.php";
+require_once "classe/template.php";
 
 $database = new Database();
-$db = $database->getConnection();
+$dbh = $database->getConnection();
 
-$commentaire = new Commentaire($db);
+$commentaire = new Commentaire($dbh);
 $commentaires = $commentaire->getAllValides();
 
 $titre = 'accueil';

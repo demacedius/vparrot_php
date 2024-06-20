@@ -1,12 +1,12 @@
 <?php
 session_start();
 $titre = "A propos";
-include_once("includes/header.php");
+include_once "includes/header.php";
 ?>
 
 <body class="bg-primary text-secondary ">
     <?php
-    include_once("includes/nav.php");
+    include_once "includes/nav.php";
     ?>
     <main class="font-primary lg:max-w-[1024px] lg:mx-auto lg:pt-4">
         <div class="flex items-center flex-col md:flex-row justify-evenly">
@@ -44,7 +44,7 @@ include_once("includes/header.php");
         </section>
     </main>
     <?php
-    include_once("includes/footer.php");
+    include_once "includes/footer.php";
     ?>
 </body>
 </html>

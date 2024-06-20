@@ -1,13 +1,27 @@
 <?php
-class Database {
-    private $db;
 
-    public function __construct() {
-        require_once __DIR__ . '/connect.php';
-        $this->db = $db;
+class Database
+{
+    private static $instance = null;
+    private $pdo;
+
+    private function __construct()
+    {
+        require 'connect.php'; // Inclure le fichier de connexion
+        $this->pdo = $dbh; // Utiliser l'objet PDO défini dans connect.php
     }
 
-    public function getConnection() {
-        return $this->db;
+    public static function getInstance()
+    {
+        if (self::$instance == null) {
+            self::$instance = new Database();
+        }
+        return self::$instance;
+    }
+
+    public function getConnection()
+    {
+        return $this->pdo;
     }
 }
+?>
