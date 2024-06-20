@@ -14,6 +14,7 @@ if (session_status() == PHP_SESSION_NONE) {
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = generateCsrfToken();
 }
+ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,3 +27,6 @@ if (empty($_SESSION['csrf_token'])) {
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <title><?= $titre ?></title>
 </head>
+<?php
+ob_end_flush();
+?>
