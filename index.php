@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once "includes/database.php";
-require_once "classe/commentaire.php";
-require_once "classe/template.php";
+require_once ("./includes/database.php");
+require_once ("./classe/commentaire.php");
+require_once ("./classe/template.php");
 
-$database = new Database();
+$database = Database::getInstance();
 $dbh = $database->getConnection();
 
 $commentaire = new Commentaire($dbh);

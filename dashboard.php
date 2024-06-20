@@ -4,7 +4,7 @@ require_once 'classe/commentaire_manager.php';
 require_once 'classe/message_utilisateur_manager.php';
 require_once 'classe/template.php';
 
-$dbInstance = new Database();
+$dbInstance = Database::getInstance();
 $db = $dbInstance->getConnection();
 
 $commentaireManager = new CommentaireManager($db);

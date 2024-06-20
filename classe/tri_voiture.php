@@ -4,7 +4,7 @@ require_once __DIR__ . '/voiture.php';
 
 header('Content-Type: application/json');
 
-$dbInstance = new Database();
+$dbInstance = Database::getInstance();
 $db = $dbInstance->getConnection();
 
 $voitureInstance = new Voiture($db);

@@ -4,7 +4,7 @@ require_once ("includes/database.php");
 require_once ("classe/voiture_manager.php");
 require_once ("classe/template.php");
 
-$dbInstance = new Database();
+$dbInstance = Database::getInstance();
 $db = $dbInstance->getConnection();
 
 $voitureManager = new VoitureManager($db);

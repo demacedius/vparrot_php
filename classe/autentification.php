@@ -26,7 +26,7 @@ class AuthController
 
                 $_SESSION["user"] = ["id" => $user["id"], "email" => $user["email"]];
 
-                header("Location: dashboard.php");
+                header("Location: ./../dashboard.php");
                 exit();
             }
         }

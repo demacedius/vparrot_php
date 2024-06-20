@@ -1,11 +1,11 @@
 <?php
 session_start();
 require_once __DIR__ . '/includes/database.php';
-require_once ("classe/voiture.php");
-require_once ("classe/template.php");
+require_once ("./classe/voiture.php");
+require_once ("./classe/template.php");
 
 
-$dbInstance = new Database();
+$dbInstance = Database::getInstance();
 $db = $dbInstance->getConnection();
 
 $voitureInstance = new Voiture($db);

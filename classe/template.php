@@ -8,14 +8,14 @@ class Template {
     }
     
     public static function header($titre) {
-        include("includes/header.php");
+        include ("./includes/header.php");
     }
 
     public static function nav() {
-        include("includes/nav.php");
+        include( "./includes/nav.php");
     }
 
     public static function footer() {
-        include("includes/footer.php");
+        include ("./includes/footer.php");
     }
 }
