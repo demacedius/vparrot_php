@@ -115,5 +115,5 @@ Template::header("tableau de bord");
 
 </html>
 <?php
-ob_flush_end();
+ob_end_flush();
 ?>
