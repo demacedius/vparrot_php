@@ -25,7 +25,7 @@ include_once __DIR__ . './classe/autentification.php';
     </main>
 
     <?php include_once ("includes/footer.php"); ?>
-
+    <script src="./script/script.js"></script>
     
 </body>
 </html>

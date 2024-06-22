@@ -111,6 +111,7 @@ Template::header("tableau de bord");
     <?php
     Template::footer();
     ?>
+    <script src="./script/script.js"></script>
 </body>
 
 </html>

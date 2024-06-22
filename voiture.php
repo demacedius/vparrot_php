@@ -82,6 +82,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             </main>
 
             <?php Template::footer(); ?>
+            <script src="./script/script.js"></script>
         </body>
         <?php
     } else {

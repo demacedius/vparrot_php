@@ -117,4 +117,5 @@ Template::header($titre);
             });
         });
     </script>
+    <script src="./script/script.js"></script>
 </body>
