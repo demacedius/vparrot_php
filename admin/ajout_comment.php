@@ -11,7 +11,7 @@
 
             $sql = "INSERT INTO `commentaire` (`nom`, `commentaire`, `note`) VALUES (:nom, :commentaire, :note )";
 
-            $query=$db->prepare($sql);
+            $query=$dbh->prepare($sql);
 
             $query->bindValue(":nom", $nom, PDO::PARAM_STR);
             $query->bindValue(":commentaire", $commentaires, PDO::PARAM_STR);
@@ -21,7 +21,7 @@
                 die("Une erreur c'est produite");
             }
 
-            $id= $db->lastInsertId();
+            $id= $dbh->lastInsertId();
          
         }else{
             die("le formulaire est incomplet");
@@ -29,7 +29,7 @@
     }
 ?>
 
-<form method="post" class="flex items-start flex-col">
+<form method="post" class="flex items-start flex-col" id="myForm">
     <div class="flex flex-col items-center p-8 gap-4">
 
         <div class="flex flex-col ">
@@ -55,3 +55,24 @@
         <button class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full" name="comment" type="submit">Enregistrez</button>
     </div>
 </form>
+
+<script>
+	document.getElementById('myForm').addEventListener('submit',function(event){
+
+	const nomInput = document.getElementById('nom');
+	const commentaireInput = document.getElementById('commentaire');
+
+	const validRegex = /^[a-zA-Z0-9'" ]*$/;
+
+	if(!validRegex.text(nomInput.value) || validRegex.test(commentaireInput.value)){
+		alert('seul les caractère alphanumérique, les apostrophes, et les guillemets simple ou double sont autorisés');
+		event.preventDefault();
+		return false;
+	}
+
+	return true;
+
+});
+
+
+</script>

@@ -8,7 +8,7 @@ class Navigation {
                 <ion-icon class="text-secondary text-3xl md:hidden block cursor-pointer" name="menu" onclick="Menu(this)"></ion-icon>
             </div>
             <ul class="font-secondary font-semibold md:flex md:items-center bg-primary md:static absolute w-full md:w-auto left-0 md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500">
-                <li class="my-6 md:my-0"><a class="hover:text-cta md:text-lg  lg:text-xl duration-500 md:mx-4" href="./index.php">Acceuil</a></li>
+                <li class="my-6 md:my-0"><a class="hover:text-cta md:text-lg  lg:text-xl duration-500 md:mx-4" href="./index.php">Accueil</a></li>
                 <li class="my-6 md:my-0"><a class="hover:text-cta md:text-lg  lg:text-xl duration-500 md:mx-4" href="./about.php">A propos</a></li>
                 <li class="my-6 md:my-0"><a class="hover:text-cta md:text-lg  lg:text-xl duration-500 md:mx-4" href="/nos_voiture.php">Nos voiture</a></li>
                 <?php if ($userLoggedIn): ?>

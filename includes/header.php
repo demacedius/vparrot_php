@@ -1,6 +1,5 @@
 <?php
 
-
 include_once 'function.php';
 
 // Start the session if not already started

@@ -1,5 +1,4 @@
 <?php
-
 require_once 'user.php';
 
 class AuthController
@@ -24,12 +23,18 @@ class AuthController
                     die("L'utilisateur et/ou le mot de passe sont incorrects");
                 }
 
+                // Authentication successful, store user information in session
                 $_SESSION["user"] = ["id" => $user["id"], "email" => $user["email"]];
 
+                // Redirect to dashboard.php
                 header("Location: ./../dashboard.php");
-                exit();
+                exit(); // Ensure no further output is sent
             }
         }
     }
+}
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+AuthController::login();
 }
 ?>

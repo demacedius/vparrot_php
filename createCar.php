@@ -1,13 +1,18 @@
 <?php
-session_start();
-require_once ("includes/database.php");
-require_once ("classe/voiture_manager.php");
-require_once ("classe/template.php");
 
-$dbInstance = Database::getInstance();
-$db = $dbInstance->getConnection();
+require_once ("./includes/database.php");
 
-$voitureManager = new VoitureManager($db);
+try {
+    $dbInstance = Database::getInstance();
+    $dbh = $dbInstance->getConnection();
+} catch (Exception $e) {
+    die("Erreur de connexion à la base de données : " . $e->getMessage());
+}
+
+require_once ("./classe/voiture_manager.php");
+require_once ("./classe/template.php");
+
+$voitureManager = new VoitureManager($dbh);
 
 if (isset($_POST["sub"])) {
     $prix = $_POST["prix"];
@@ -29,7 +34,7 @@ if (isset($_POST["sub"])) {
 
             echo "Voiture ajoutée avec succès";
 
-            header('location: index.php');
+            header('location: ./index.php');
             exit();
         } else {
             echo "Erreur lors de l'upload du fichier";

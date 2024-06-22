@@ -1,26 +1,31 @@
 <?php
 class VoitureManager
 {
-    private $dbh;
+    private $db;
 
     public function __construct($db)
     {
-        $dbInstance = Database::getInstance();
-	$this->dbh = $dbInstance->getConnection();
+        $this->db = $db;
     }
 
     public function addVoiture($prix, $nom, $description, $kilometrage, $annee, $image)
     {
         try {
-           
-            $this->dbh->beginTransaction();
-           
+            echo "Début de la méthode addVoiture<br>";
 
-           
+        
+
+            echo "Connexion à la base de données réussie<br>";
+
+            // Commencer une transaction
+            $this->db->beginTransaction();
+            echo "Transaction commencée<br>";
+
+            // Préparer la requête SQL avec des paramètres nommés
             $sql = "INSERT INTO `voiture` (`prix`, `kilometrage`, `annee`, `image`, `nom`, `description`) 
                 VALUES (:prix, :kilometrage, :annee, :image, :nom, :description)";
-            $query = $this->dbh->prepare($sql);
-           
+            $query = $this->db->prepare($sql);
+            echo "Requête SQL préparée<br>";
 
             // Associer les valeurs aux paramètres nommés
             $query->bindParam(':prix', $prix);
@@ -29,25 +34,30 @@ class VoitureManager
             $query->bindParam(':image', $image);
             $query->bindParam(':nom', $nom);
             $query->bindParam(':description', $description);
-           
+            echo "Paramètres associés<br>";
 
             // Afficher les valeurs des paramètres avant l'exécution pour débogage
-           
+            echo "Valeurs des paramètres : ";
+            var_dump($prix, $kilometrage, $annee, $image, $nom, $description);
+            echo "<br>";
 
             // Exécuter la requête
             $result = $query->execute();
 
-           
+            // Afficher le résultat de l'exécution pour débogage
+            echo "Résultat de l'exécution : ";
+            var_dump($result);
+            echo "<br>";
 
             // Vérifier si la requête a réussi
             if ($result) {
                 // Valider la transaction
-                $this->dbh->commit();
+                $this->db->commit();
                 echo "Transaction validée<br>";
                 return true;
             } else {
                 // Annuler la transaction
-                $this->dbh->rollBack();
+                $this->db->rollBack();
                 $errorInfo = $query->errorInfo();
                 throw new Exception("Erreur lors de l'exécution de la requête : " . $errorInfo[2]);
             }
@@ -59,5 +69,16 @@ class VoitureManager
     }
 }
 
+// Connexion à la base de données
+try {
+    $db = new PDO('mysql:host=db5015928952.hosting-data.io;dbname=deMacedo_ecf', 'root', 'Amandine2412.');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connexion à la base de données établie avec succès<br>";
+} catch (PDOException $e) {
+    echo "Erreur de connexion : " . $e->getMessage();
+    die();
+}
+
+// Utilisation de VoitureManager
 
 ?>

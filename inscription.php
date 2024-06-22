@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["subUser"])) {
     if (isset($_POST["email"], $_POST["password"]) && !empty($_POST["password"]) && !empty($_POST["password"])) {
@@ -10,11 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["subUser"])) {
 
         $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-        require_once("includes/connect.php");
+        require_once("./includes/connect.php");
 
         $sql = "INSERT INTO `users`(`email`,`password`) VALUES (:email, '$password')";
 
-        $query = $db->prepare($sql);
+        $query = $dbh->prepare($sql);
         $query->bindValue(":email", $_POST["email"], PDO::PARAM_STR);
 
         try {
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["subUser"])) {
             die("Erreur d'insertion utilisateur : " . $e->getMessage());
         }
 
-        $id = $db->lastInsertId();
+        $id = $dbh->lastInsertId();
         
     }
 }

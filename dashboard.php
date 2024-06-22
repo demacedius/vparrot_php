@@ -1,20 +1,41 @@
 <?php
-require_once 'includes/database.php';
-require_once 'classe/commentaire_manager.php';
-require_once 'classe/message_utilisateur_manager.php';
-require_once 'classe/template.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+ob_start();
+require_once './includes/database.php';
+
+
+require_once './classe/commentaire_manager.php';
+require_once './classe/message_utilisateur_manager.php';
+require_once './classe/template.php';
+
+session_start();
+
+if(!isset($_SESSION['user'])){
+	header("Location: login.php");
+	exit();
+}
 
 $dbInstance = Database::getInstance();
-$db = $dbInstance->getConnection();
+$dbh = $dbInstance->getConnection();
 
-$commentaireManager = new CommentaireManager($db);
-$messageUtilisateurManager = new MessageUtilisateurManager($db);
+$commentaireManager = new CommentaireManager($dbh);
+$messageUtilisateurManager = new MessageUtilisateurManager($dbh);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["valideComment"])) {
-    $commentaire_id = $_POST['commentaire_id'];
-    $commentaireManager->validerCommentaire($commentaire_id);
-    header("Location: index.php");
-    exit();
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+	if(isset($_POST["valideComment"])){
+   	 $commentaire_id = $_POST['commentaire_id'];
+   	 $commentaireManager->validerCommentaire($commentaire_id);
+   	 header("Location: ./index.php");
+   	 exit();
+	}elseif(isset($_POST["deleteComment"])){
+		$commentaire_id = $_POST['commentaire_id'];
+		$commentaireManager->deleteComment($commentaire_id);
+		header("Location: /");
+		exit();
+	}
 }
 
 Template::header("tableau de bord");
@@ -28,11 +49,11 @@ Template::header("tableau de bord");
     <main class="gap-8 md:grid md:grid-cols-2 max-w-[1024px] mx-auto ">
         <div>
             <?php if ($_SESSION["user"]["email"] == "vparrot@vparrot.fr"): ?>
-                <?php include_once ("inscription.php"); ?>
+                <?php include_once ("./inscription.php"); ?>
             <?php endif; ?>
             </div>
             <div>
-                <?php include_once ("createCar.php"); ?>
+                <?php include_once ("./createCar.php"); ?>
             </div>
             <div class="md:grid md:grid-cols-2 gap-8 w-full">
                 <?php foreach ($messageUtilisateurManager->getAllMessages() as $message): ?>
@@ -78,8 +99,9 @@ Template::header("tableau de bord");
                             <form method="post">
                                 <input type="hidden" name="commentaire_id" value="<?= $commentaire['id'] ?>">
                                 <button type="submit" name="valideComment"
-                                    class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full">Valider
+                                    class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 mb-4 rounded-full">Valider
                                     ce commentaire</button>
+				<button type="submit" name="deleteComment" class="bg-cta hover:bg-ctaHover duration-500 ease-in-out text-secondary font-bold w-full font-primary p-2 rounded-full">Supprimer ce commentaire</button>
                             </form>
                         </div>
                     <?php endif ?>
@@ -92,3 +114,6 @@ Template::header("tableau de bord");
 </body>
 
 </html>
+<?php
+ob_flush_end();
+?>
